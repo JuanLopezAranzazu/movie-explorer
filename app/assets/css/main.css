@@ -2,17 +2,98 @@
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Fraunces', serif;
 
-  --color-green-50: #EFFDF5;
-  --color-green-100: #D9FBE8;
-  --color-green-200: #B3F5D1;
-  --color-green-300: #75EDAE;
-  --color-green-400: #00DC82;
-  --color-green-500: #00C16A;
-  --color-green-600: #00A155;
-  --color-green-700: #007F45;
-  --color-green-800: #016538;
-  --color-green-900: #0A5331;
-  --color-green-950: #052E16;
+  /* Dorado de marquesina — acento primario */
+  --color-gold-50: #FDF8EC;
+  --color-gold-100: #FAEFD0;
+  --color-gold-200: #F3DD9E;
+  --color-gold-300: #ECC96A;
+  --color-gold-400: #E7B93F;
+  --color-gold-500: #D6A428;
+  --color-gold-600: #B4841D;
+  --color-gold-700: #8C641A;
+  --color-gold-800: #6B4C18;
+  --color-gold-900: #4C3714;
+  --color-gold-950: #2B1E0B;
+
+  /* Rojo cortina — acento secundario, usado con moderación */
+  --color-curtain-50: #FBEDEC;
+  --color-curtain-100: #F3D1CF;
+  --color-curtain-200: #E4A29D;
+  --color-curtain-300: #D3736C;
+  --color-curtain-400: #BC4E45;
+  --color-curtain-500: #A8322D;
+  --color-curtain-600: #8A2925;
+  --color-curtain-700: #6C201D;
+  --color-curtain-800: #4F1815;
+  --color-curtain-900: #35100E;
+  --color-curtain-950: #1E0908;
+
+  /* Neutros casi negro, con temperatura cálida (no gris SaaS puro) */
+  --color-ink-50: #F3EFE6;
+  --color-ink-100: #E4DFD3;
+  --color-ink-200: #C7C1B4;
+  --color-ink-300: #9C98A6;
+  --color-ink-400: #6E6B78;
+  --color-ink-500: #4A4852;
+  --color-ink-600: #35333C;
+  --color-ink-700: #26252C;
+  --color-ink-800: #1B1A20;
+  --color-ink-900: #141318;
+  --color-ink-950: #0D0D12;
+}
+
+:root {
+  --ui-radius: 0.25rem;
+}
+
+.dark {
+  --ui-primary: var(--color-gold-400);
+  --ui-bg: var(--color-ink-950);
+  --ui-bg-elevated: var(--color-ink-900);
+  --ui-bg-accented: var(--color-ink-800);
+  --ui-border: var(--color-ink-700);
+  --ui-text: var(--color-ink-50);
+  --ui-text-muted: var(--color-ink-300);
+}
+
+body {
+  background-color: var(--color-ink-950);
+  color: var(--color-ink-50);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+/* Textura muy sutil de grano, como una sala de cine antigua */
+.marquee-noise {
+  position: relative;
+}
+.marquee-noise::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Tira de película decorativa: perforaciones a ambos lados */
+.filmstrip {
+  --hole: 10px;
+  background-color: var(--color-ink-900);
+  background-image:
+    radial-gradient(circle, var(--color-ink-950) calc(var(--hole) / 2), transparent calc(var(--hole) / 2 + 1px)),
+    radial-gradient(circle, var(--color-ink-950) calc(var(--hole) / 2), transparent calc(var(--hole) / 2 + 1px));
+  background-position: 16px center, calc(100% - 16px) center;
+  background-repeat: repeat-y, repeat-y;
+  background-size: 100% 28px, 100% 28px;
+}
+
+.text-balance {
+  text-wrap: balance;
 }
