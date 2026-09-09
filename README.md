@@ -1,64 +1,62 @@
-# Nuxt Starter Template
+# Movie Explorer
 
-[![Nuxt UI](https://img.shields.io/badge/Made%20with-Nuxt%20UI-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com)
+App para explorar películas hecha con **Nuxt 4 + Nuxt UI**, consumiendo la API pública de [TMDB](https://www.themoviedb.org/documentation/api).
 
-Use this template to get started with [Nuxt UI](https://ui.nuxt.com) quickly.
+## Qué incluye
 
-- [Live demo](https://starter-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/docs/getting-started/installation/nuxt)
+- Búsqueda de películas con debounce
+- Tendencias de la semana y populares en portada
+- Filtro por género
+- Página de detalle: sinopsis, reparto, tráiler y "similares"
+- La API key de TMDB **nunca se expone al navegador**: vive solo en el servidor (`server/api/tmdb/[...path].ts`), que actúa de proxy hacia TMDB.
 
-<a href="https://starter-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png">
-    <img alt="Nuxt Starter Template" src="https://ui.nuxt.com/assets/templates/nuxt/starter-light.png" width="830" height="466">
-  </picture>
-</a>
+## 1. Consigue una API key de TMDB (gratis)
 
-> The starter template for Vue is on https://github.com/nuxt-ui-templates/starter-vue.
+1. Crea una cuenta en https://www.themoviedb.org/signup
+2. Ve a **Configuración → API** → https://www.themoviedb.org/settings/api
+3. Solicita una key tipo "Developer" (uso personal/no comercial, aprobación instantánea)
+4. Copia el valor de **"API Key (v3 auth)"**
 
-## Quick Start
+## 2. Configura las variables de entorno
 
-```bash [Terminal]
-npm create nuxt@latest -- -t ui
+```bash
+cp .env.example .env
 ```
 
-## Deploy your own
+Y pega tu key en `.env`:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-name=starter&repository-url=https%3A%2F%2Fgithub.com%2Fnuxt-ui-templates%2Fstarter&demo-image=https%3A%2F%2Fui.nuxt.com%2Fassets%2Ftemplates%2Fnuxt%2Fstarter-dark.png&demo-url=https%3A%2F%2Fstarter-template.nuxt.dev%2F&demo-title=Nuxt%20Starter%20Template&demo-description=A%20minimal%20template%20to%20get%20started%20with%20Nuxt%20UI.)
+```
+NUXT_TMDB_API_KEY=tu_api_key_de_tmdb
+```
 
-## Setup
-
-Make sure to install the dependencies:
+## 3. Instala y corre
 
 ```bash
 pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
 pnpm dev
 ```
 
-## Production
+Abre http://localhost:3000
 
-Build the application for production:
+## Estructura relevante
+
+```
+app/
+  pages/index.vue          → búsqueda, tendencias, populares, filtro por género
+  pages/movie/[id].vue     → ficha de la película
+  components/MovieCard.vue → tarjeta de póster
+  components/MovieGrid.vue → grid con estados de carga/vacío
+  composables/useTmdb.ts   → todas las llamadas a la API
+  assets/css/main.css      → tema visual (paleta, tipografía, texturas)
+server/
+  api/tmdb/[...path].ts    → proxy que añade la api_key en el servidor
+```
+
+## Producción
 
 ```bash
 pnpm build
-```
-
-Locally preview production build:
-
-```bash
 pnpm preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-
-## Renovate integration
-
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+Recuerda definir `NUXT_TMDB_API_KEY` como variable de entorno en tu plataforma de despliegue (Vercel, Netlify, etc.), no la subas en el `.env` al repositorio.
