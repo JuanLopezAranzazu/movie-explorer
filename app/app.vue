@@ -1,80 +1,54 @@
-<script setup>
+<script setup lang="ts">
 useHead({
-  meta: [
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-  ],
-  link: [
-    { rel: 'icon', href: '/favicon.ico' }
-  ],
-  htmlAttrs: {
-    lang: 'en'
-  }
+  htmlAttrs: { lang: 'es' },
+  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
 })
 
-const title = 'Nuxt Starter Template'
-const description = 'A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours.'
+const title = 'Movie Explorer'
+const description = 'Explora películas populares, en tendencia y por género usando la API de TMDB.'
 
 useSeoMeta({
   title,
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
-  twitterCard: 'summary_large_image'
+  themeColor: '#0D0D12'
 })
 </script>
 
 <template>
   <UApp>
-    <UHeader>
-      <template #left>
-        <NuxtLink
-          to="/"
-          class="focus-visible:outline-3 outline-primary/25 rounded-md p-1 -ms-1"
-        >
-          <AppLogo class="w-auto h-6 shrink-0" />
-        </NuxtLink>
+    <div class="min-h-screen bg-ink-950 text-ink-50">
+      <header class="sticky top-0 z-30 border-b border-ink-800 bg-ink-950/90 backdrop-blur">
+        <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <NuxtLink to="/" class="rounded-sm outline-gold-400 outline-offset-4 focus-visible:outline-2">
+            <AppLogo />
+          </NuxtLink>
 
-        <TemplateMenu />
-      </template>
+          <UButton
+            to="https://www.themoviedb.org/"
+            target="_blank"
+            variant="ghost"
+            color="neutral"
+            size="sm"
+            class="text-ink-400 hover:text-ink-100"
+          >
+            Datos de TMDB
+          </UButton>
+        </div>
+      </header>
 
-      <template #right>
-        <UColorModeButton />
+      <main>
+        <NuxtPage />
+      </main>
 
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
-      </template>
-    </UHeader>
-
-    <UMain>
-      <NuxtPage />
-    </UMain>
-
-    <USeparator icon="i-simple-icons-nuxtdotjs" />
-
-    <UFooter>
-      <template #left>
-        <p class="text-sm text-muted">
-          Built with Nuxt UI • © {{ new Date().getFullYear() }}
-        </p>
-      </template>
-
-      <template #right>
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
-      </template>
-    </UFooter>
+      <footer class="mt-24 border-t border-ink-800">
+        <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+          <p class="text-sm text-ink-500">
+            Movie Explorer usa la API de TMDB pero no está respaldada ni certificada por TMDB.
+          </p>
+        </div>
+      </footer>
+    </div>
   </UApp>
 </template>
