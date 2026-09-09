@@ -2,6 +2,16 @@
 // el navegador solo llama a /api/tmdb/..., y este handler adjunta la key
 // desde runtimeConfig (variable de entorno NUXT_TMDB_API_KEY) antes de
 // reenviar la petición a api.themoviedb.org.
+
+interface TmdbError {
+  response?: {
+    status?: number
+  }
+  data?: {
+    status_message?: string
+  }
+}
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
@@ -23,10 +33,13 @@ export default defineEventHandler(async (event) => {
         language: query.language || 'es-ES'
       }
     })
-  } catch (err: any) {
+  } catch (err: unknown) {
+    const error = err as TmdbError
+
     throw createError({
-      statusCode: err?.response?.status || 502,
-      statusMessage: err?.data?.status_message || 'No se pudo consultar TMDB.'
+      statusCode: error.response?.status || 502,
+      statusMessage:
+        error.data?.status_message || 'No se pudo consultar TMDB.'
     })
   }
 })

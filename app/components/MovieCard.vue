@@ -26,7 +26,10 @@ const rating = computed(() => (props.movie.vote_average ? props.movie.vote_avera
         v-else
         class="flex h-full w-full flex-col items-center justify-center gap-2 bg-ink-800 px-4 text-center text-ink-400"
       >
-        <UIcon name="i-lucide-image-off" class="size-6" />
+        <UIcon
+          name="i-lucide-image-off"
+          class="size-6"
+        />
         <span class="text-xs">Sin póster disponible</span>
       </div>
 
@@ -36,7 +39,10 @@ const rating = computed(() => (props.movie.vote_average ? props.movie.vote_avera
         v-if="rating"
         class="absolute right-2 top-2 flex items-center gap-1 rounded-sm bg-ink-950/80 px-1.5 py-0.5 text-xs font-medium text-gold-300 backdrop-blur-sm"
       >
-        <UIcon name="i-lucide-star" class="size-3 fill-gold-400 text-gold-400" />
+        <UIcon
+          name="i-lucide-star"
+          class="size-3 fill-gold-400 text-gold-400"
+        />
         {{ rating }}
       </div>
     </div>

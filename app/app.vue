@@ -21,7 +21,10 @@ useSeoMeta({
     <div class="min-h-screen bg-ink-950 text-ink-50">
       <header class="sticky top-0 z-30 border-b border-ink-800 bg-ink-950/90 backdrop-blur">
         <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <NuxtLink to="/" class="rounded-sm outline-gold-400 outline-offset-4 focus-visible:outline-2">
+          <NuxtLink
+            to="/"
+            class="rounded-sm outline-gold-400 outline-offset-4 focus-visible:outline-2"
+          >
             <AppLogo />
           </NuxtLink>
 

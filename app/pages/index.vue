@@ -77,7 +77,10 @@ const { data: popularData, pending: popularPending } = await useAsyncData('popul
             placeholder="Busca por título — “Ciudad de Dios”, “Amélie”…"
             :ui="{ base: 'bg-ink-950 ring-1 ring-ink-700 focus-visible:ring-gold-400 rounded-sm' }"
           >
-            <template v-if="searchInput" #trailing>
+            <template
+              v-if="searchInput"
+              #trailing
+            >
               <UButton
                 icon="i-lucide-x"
                 variant="link"
@@ -91,7 +94,10 @@ const { data: popularData, pending: popularPending } = await useAsyncData('popul
         </div>
 
         <!-- Géneros -->
-        <div v-if="genres.length" class="mt-6 flex flex-wrap gap-2">
+        <div
+          v-if="genres.length"
+          class="mt-6 flex flex-wrap gap-2"
+        >
           <button
             v-for="genre in genres"
             :key="genre.id"
@@ -117,7 +123,10 @@ const { data: popularData, pending: popularPending } = await useAsyncData('popul
         <h2 class="font-display text-2xl text-ink-50">
           Resultados para «{{ debouncedQuery }}»
         </h2>
-        <p v-if="searchData?.total_results" class="mt-1 text-sm text-ink-400">
+        <p
+          v-if="searchData?.total_results"
+          class="mt-1 text-sm text-ink-400"
+        >
           {{ searchData.total_results }} título{{ searchData.total_results === 1 ? '' : 's' }} encontrado{{ searchData.total_results === 1 ? '' : 's' }}
         </p>
         <div class="mt-6">
@@ -152,10 +161,16 @@ const { data: popularData, pending: popularPending } = await useAsyncData('popul
             <h2 class="font-display text-2xl text-ink-50">
               Tendencia esta semana
             </h2>
-            <UIcon name="i-lucide-flame" class="size-5 text-gold-400" />
+            <UIcon
+              name="i-lucide-flame"
+              class="size-5 text-gold-400"
+            />
           </div>
           <div class="mt-6">
-            <MovieGrid :movies="trendingData?.results ?? []" :pending="trendingPending" />
+            <MovieGrid
+              :movies="trendingData?.results ?? []"
+              :pending="trendingPending"
+            />
           </div>
         </section>
 
@@ -164,10 +179,16 @@ const { data: popularData, pending: popularPending } = await useAsyncData('popul
             <h2 class="font-display text-2xl text-ink-50">
               Populares
             </h2>
-            <UIcon name="i-lucide-ticket" class="size-5 text-gold-400" />
+            <UIcon
+              name="i-lucide-ticket"
+              class="size-5 text-gold-400"
+            />
           </div>
           <div class="mt-6">
-            <MovieGrid :movies="popularData?.results ?? []" :pending="popularPending" />
+            <MovieGrid
+              :movies="popularData?.results ?? []"
+              :pending="popularPending"
+            />
           </div>
         </section>
       </template>
